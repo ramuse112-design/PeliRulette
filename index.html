@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍿 Recomendador de Cine Inteligente</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- PANTALLA DE LOGIN INICIAL -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-card">
+            <h2>🎬 Mi Cinemateca</h2>
+            <p>Introduce tu nombre de usuario para cargar tu perfil local de películas y estadísticas.</p>
+            <div class="login-group">
+                <input type="text" id="username-input" placeholder="Tu nombre o nick...">
+                <button id="btn-login">Entrar 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL DE LA APP -->
+    <div id="app-content" class="hidden">
+        <button id="btn-open-watchlist" class="btn-toggle-watchlist">
+            Ver mi Lista 💖 (<span id="watchlist-count">0</span>)
+        </button>
+
+        <div class="container">
+            <header>
+                <div class="user-badge">
+                    <span>Usuario: <strong id="display-username">-</strong></span>
+                    <button id="btn-logout" class="btn-xs">Cambiar</button>
+                </div>
+                <h1>🍿 ¿Qué peli vemos hoy?</h1>
+                <button id="btn-open-stats" class="btn-secondary">📊 Ver mis Estadísticas</button>
+            </header>
+
+            <main class="filter-section">
+                <!-- BUSCADOR ESPECÍFICO CON AUTOCOMPLETADO -->
+                <div class="search-group">
+                    <div class="search-input-wrapper">
+                        <input type="text" id="search-input" placeholder="Buscar película por título..." autocomplete="off">
+                        <div id="search-results-dropdown" class="search-dropdown hidden"></div>
+                    </div>
+                    <button id="btn-clear-search" class="btn-clear hidden">✕</button>
+                </div>
+
+                <div class="selector-group">
+                    <label for="genre">Elige un género:</label>
+                    <select id="genre">
+                        <option value="">Cualquiera</option>
+                        <option value="28">Acción</option>
+                        <option value="35">Comedia</option>
+                        <option value="27">Terror</option>
+                        <option value="878">Ciencia Ficción</option>
+                        <option value="18">Drama</option>
+                        <option value="14">Fantasía</option>
+                        <option value="53">Suspense</option>
+                        <option value="10749">Romance</option>
+                    </select>
+                </div>
+
+                <div class="selector-group">
+                    <label for="era">Elige una época:</label>
+                    <select id="era">
+                        <option value="all">Cualquier año</option>
+                        <option value="retro">Clásicos Retro (80s - 90s)</option>
+                        <option value="2000s">Época Dorada (2000 - 2010)</option>
+                        <option value="modern">Modernas (2011 - 2020)</option>
+                        <option value="recent">Estrenos (2021+)</option>
+                    </select>
+                </div>
+
+                <div class="selector-group">
+                    <label for="filter-type">Modo de búsqueda:</label>
+                    <select id="filter-type">
+                        <option value="discover">Búsqueda Normal</option>
+                        <option value="gems">Joyas Ocultas 💎</option>
+                        <option value="trending">Tendencias del Momento 📈</option>
+                    </select>
+                </div>
+                <button id="btn-recommend">¡Recomendar Película! ⚡</button>
+            </main>
+
+            <section id="movie-result" class="movie-card hidden"></section>
+        </div>
+
+        <!-- SIDEBAR CON PESTAÑAS (PENDIENTES / VISTAS) -->
+        <div id="watchlist-sidebar" class="watchlist-sidebar">
+            <div class="sidebar-header">
+                <h3>🎬 Mi Cinemateca</h3>
+                <button id="btn-close-watchlist" class="btn-close-sidebar">✕</button>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-target="pendientes">Pendientes</button>
+                <button class="tab-btn" data-target="vistas">Vistas</button>
+            </div>
+
+            <ul id="watchlist-list" class="list-content active" data-tab="pendientes"></ul>
+            <ul id="watched-list" class="list-content" data-tab="vistas"></ul>
+        </div>
+
+        <!-- MODAL DE ESTADÍSTICAS AVANZADAS -->
+        <div id="stats-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3>📊 Tus Estadísticas</h3>
+                <p style="margin-bottom: 15px; font-size: 0.9rem; color: var(--accent-color);">Perfil: <span id="stats-user-name"></span></p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Vistas</span>
+                        <span class="stat-value" id="stat-movies">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Tiempo Total</span>
+                        <span class="stat-value" id="stat-time">0d 0h 0m</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Género Top</span>
+                        <span class="stat-value" id="stat-genre">-</span>
+                    </div>
+                    <div class="stat-item full-width">
+                        <span class="stat-label">Época Favorita</span>
+                        <span class="stat-value" id="stat-era">-</span>
+                    </div>
+                </div>
+                <button id="btn-close-stats" style="margin-top: 20px;">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

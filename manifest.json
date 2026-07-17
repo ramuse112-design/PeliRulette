@@ -1,15 +1,20 @@
 {
   "name": "Ruleta de Películas",
   "short_name": "RuletaPelis",
-  "start_url": "./index.html",
-  "scope": "./",
+  "start_url": "/PeliRulette/index.html",
+  "scope": "/PeliRulette/",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#f59e0b",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "/PeliRulette/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/PeliRulette/icon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
